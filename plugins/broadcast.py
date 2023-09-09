@@ -8,7 +8,7 @@ from utils import broadcast_messages
 import asyncio
 from pyrogram.errors import FloodWait
 
-@Client.on_message(filters.command("share") & filters.user(ADMINS) & filters.reply)
+@Client.on_message(filters.command("broadcast") & filters.user(ADMINS) & filters.reply)
 # https://t.me/GetTGLink/4178
 async def speed_verupikkals(bot, message):
     users = await db.get_all_users()
@@ -31,16 +31,6 @@ async def speed_verupikkals(bot, message):
             failed += 1
     time_taken = datetime.timedelta(seconds=int(time.time()-start_time))
     await sts.edit(f"Completed\nTotal : {total_users}\nSuccess : {success}\nFailed : {failed}\nTime Taken : {time_taken}")     
-        
-@Client.on_callback_query(filters.regex(r'^broadcast_cancel'))
-async def broadcast_cancel(bot, query):
-    _, ident = query.data.split("#")
-    if ident == 'users':
-        await query.message.edit("Trying to cancel users broadcasting...")
-        temp.USERS_CANCEL = True
-    elif ident == 'groups':
-        temp.GROUPS_CANCEL = True
-        await query.message.edit("Trying to cancel groups broadcasting...")
         
         
 """@Client.on_message(filters.command("broadcast") & filters.user(ADMINS) & filters.reply)
