@@ -13,6 +13,7 @@ class JoinReqs:
             self.client = motor.motor_asyncio.AsyncIOMotorClient(JOIN_REQS_DB)
             self.db = self.client["JoinReqs"]
             self.col = self.db[str(REQ_CHANNEL)]
+            self.chat_col = self.db["ChatId"]
         else:
             self.client = None
             self.db = None
@@ -44,4 +45,18 @@ class JoinReqs:
 
     async def get_all_users_count(self):
         return await self.col.count_documents({})
+
+    async def add_fsub_chat(self, chat_id):
+        try:
+            await self.chat_col.delete_many({})
+            await self.chat_col.insert_one({"chat_id": chat_id})
+        except:
+            pass
+
+    async def get_fsub_chat(self):
+        return await self.chat_col.find_one({})
+
+    async def delete_fsub_chat(self, chat_id):
+        await self.chat_col.delete_one({"chat_id": chat_id})
+
 
