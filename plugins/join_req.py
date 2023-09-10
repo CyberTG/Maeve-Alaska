@@ -4,7 +4,7 @@
 
 from logging import getLogger
 from pyrogram import Client, filters, enums
-from pyrogram.types import ChatJoinRequest
+from pyrogram.types import ChatJoinRequest, Message
 from database.join_reqs import JoinReqs
 from info import ADMINS, REQ_CHANNEL
 
@@ -52,4 +52,35 @@ async def purge_requests(client, message):
             disable_web_page_preview=True
         )
 
+@Client.on_message(filters.command("setchat") & filters.user(ADMINS) & filters.private)
+async def add_fsub_chats(bot: Client, update: Message):
 
+    chat = update.command[1] if len(update.command) > 1 else None
+    if not chat:
+        await update.reply_text("Invalid chat id.", quote=True)
+        return
+    else:
+        chat = int(chat)
+
+    await db().add_fsub_chat(chat)
+
+    text = f"Added chat <code>{chat}</code> to the database."
+    await update.reply_text(text=text, quote=True, parse_mode=enums.ParseMode.HTML)
+
+
+@Client.on_message(filters.command("delchat") & filters.user(ADMINS) & filters.private)
+async def clear_fsub_chats(bot: Client, update: Message):
+
+    await db().delete_fsub_chat(chat_id=(await db.get_fsub_chat()))
+    await update.reply_text(text="Deleted fsub chat from the database.", quote=True)
+
+
+@Client.on_message(filters.command("viewchat") & filters.user(ADMINS) & filters.private)
+async def get_fsub_chat(bot: Client, update: Message):
+
+    chat = await db().get_fsub_chat()
+    if not chat:
+        await update.reply_text("No fsub chat found in the database.", quote=True)
+        return
+    else:
+        await update.reply_text(f"Fsub chat: <code>{chat}</code>", quote=True, parse_mode=enums.ParseMode.HTML)
