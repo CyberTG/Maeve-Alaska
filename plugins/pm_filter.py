@@ -538,7 +538,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.answer("🔰 Ask with correct spelling\n🔰 Don't ask movies those are not released in OTT Some Of Theatre Quality Available🤧\n🔰 For better results:\n\t\t\t\t\t\t- MovieName year\n\t\t\t\t\t\t- Eg: Kuruthi 2021\n\tⒸ Cinema hub", True)
 
     elif query.data == 'about':
-        await query.answer(text=ABOUT_TXT, True)
+        await query.answer(text=ABOUT_TXT, show_alert=True)
 
 
 
