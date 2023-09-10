@@ -7,11 +7,17 @@ logging.getLogger().setLevel(logging.INFO)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 logging.getLogger("imdbpy").setLevel(logging.ERROR)
 
+import os 
+import sys
+
 from pyrogram import Client, __version__
 from pyrogram.raw.all import layer
 from database.ia_filterdb import Media
 from database.users_chats_db import db
-from info import SESSION, API_ID, API_HASH, BOT_TOKEN, LOG_STR, LOG_CHANNEL
+
+from database.join_reqs import JoinReqs
+from info import *
+#from info import SESSION, API_ID, API_HASH, BOT_TOKEN, LOG_STR, LOG_CHANNEL
 from utils import temp
 from typing import Union, Optional, AsyncGenerator
 from pyrogram import types
@@ -41,6 +47,17 @@ class Bot(Client):
         temp.BANNED_CHATS = b_chats
         await super().start()
         await Media.ensure_indexes()
+        
+        if REQ_CHANNEL == None:
+            with open("./dynamic.env", "wt+") as f:
+                req = await JoinReqs().get_fsub_chat()
+                if req is None:
+                    req = False
+                f.write(f"REQ_CHANNEL={req}\n")
+            logging.info("Loading REQ_CHANNEL from database...")
+            os.execl(sys.executable, sys.executable, "bot.py")
+            return
+
         me = await self.get_me()
         temp.ME = me.id
         temp.U_NAME = me.username
