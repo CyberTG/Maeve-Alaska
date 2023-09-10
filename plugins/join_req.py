@@ -7,7 +7,8 @@ from pyrogram import Client, filters, enums
 from pyrogram.types import ChatJoinRequest, Message
 from database.join_reqs import JoinReqs
 from info import ADMINS, REQ_CHANNEL
-
+import os
+import sys
 
 db = JoinReqs
 logger = getLogger(__name__)
@@ -66,6 +67,12 @@ async def add_fsub_chats(bot: Client, update: Message):
 
     text = f"Added chat <code>{chat}</code> to the database."
     await update.reply_text(text=text, quote=True, parse_mode=enums.ParseMode.HTML)
+    with open("./dynamic.env", "wt+") as f:
+        f.write(f"REQ_CHANNEL={chat}\n")
+
+    logger.info("Restarting to update REQ_CHANNEL from database...")
+    await update.reply_text("Restarting...", quote=True)
+    os.execl(sys.executable, sys.executable, "bot.py")
 
 
 @Client.on_message(filters.command("delchat") & filters.user(ADMINS) & filters.private)
@@ -73,6 +80,12 @@ async def clear_fsub_chats(bot: Client, update: Message):
 
     await db().delete_fsub_chat(chat_id=(await db().get_fsub_chat())['chat_id'])
     await update.reply_text(text="Deleted fsub chat from the database.", quote=True)
+    with open("./dynamic.env", "wt+") as f:
+        f.write(f"REQ_CHANNEL=False\n")
+
+    logger.info("Restarting to update REQ_CHANNEL from database...")
+    await update.reply_text("Restarting...", quote=True)
+    os.execl(sys.executable, sys.executable, "bot.py")
 
 
 @Client.on_message(filters.command("viewchat") & filters.user(ADMINS) & filters.private)
