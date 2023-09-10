@@ -49,7 +49,9 @@ HELP_TXT = """
 """
 
 ABOUT_TXT = """
-HLOS"""
+Hʏ {query.from_user.mention}!,
+
+I ᴀᴍ ᴏғғɪᴄɪᴀʟʟʏ ᴍᴀᴅᴇ ғᴏʀ Cɪɴᴇᴍᴀ_Bᴇᴀᴄᴏɴ_Gʀᴏᴜᴘ I ᴄᴀɴ ʜᴇʟᴘ ᴛᴏ ғɪɴᴅ ʏᴏᴜʀ ᴍᴏᴠɪᴇꜱ 🙂"""
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message):
@@ -448,7 +450,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
-            text=script.START_TXT.format(query.from_user.mention, temp.U_NAME, temp.B_NAME),
+            text=script.STARTER_TXT.format(query.from_user.mention, temp.U_NAME, temp.B_NAME),
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
@@ -538,7 +540,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.answer("🔰 Ask with correct spelling\n🔰 Don't ask movies those are not released in OTT Some Of Theatre Quality Available🤧\n🔰 For better results:\n\t\t\t\t\t\t- MovieName year\n\t\t\t\t\t\t- Eg: Kuruthi 2021\n\tⒸ Cinema hub", True)
 
     elif query.data == 'about':
-        await query.answer(text=ABOUT_TXT, show_alert=True)
+        await query.answer(text=ABOUT_TXT.format(query.from_user.mention), show_alert=True)
 
 
 
