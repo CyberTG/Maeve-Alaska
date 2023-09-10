@@ -28,6 +28,28 @@ logger.setLevel(logging.ERROR)
 BUTTONS = {}
 SPELL_CHECK = {}
 
+HELP_TXT = """
+<b><u>𝘚𝘖𝘔𝘌 𝘊𝘖𝘔𝘔𝘈𝘕𝘋 𝘍𝘖𝘙 𝘈𝘋𝘔𝘐𝘕𝘚</u></b>
+
+<u>Bot Status</u>
+/stats - To see bot status 
+
+<u>Broadcast Message</u>
+/broadcast - For broadcast a message to users
+/speedcast - Its like broadcast with extra speed
+
+<u>Force Sub</u>
+/totalrequests - To See Total Requests 
+/purgerequests - To purge Requests
+
+<u>Important For Force Sub </u>
+/setchat - To set a Force Sub Channel (REQ_CHANNEL)
+/delchat - To Delete your saved Force Sub channel
+/viewchat - To view your Force Sub channel
+"""
+
+ABOUT_TXT = """
+HLOS"""
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message):
@@ -418,6 +440,30 @@ async def cb_handler(client: Client, query: CallbackQuery):
         
     elif query.data == "start":
         buttons = [[
+            InlineKeyboardButton('⇋ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ⇌', url='http://t.me/TGxMULTIBOT?startgroup=true')
+        ],[
+            InlineKeyboardButton('ʜᴇʟᴘ', callback_data='help'),
+            InlineKeyboardButton('ɢʀᴏᴜᴘs', url='https://t.me/Cinema_Beacon_Group'),
+            InlineKeyboardButton('ᴀʙᴏᴜᴛ', callback_data='about')
+        ]]
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await query.message.edit_text(
+            text=script.START_TXT.format(query.from_user.mention, temp.U_NAME, temp.B_NAME),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
+    elif query.data == "help":
+        buttons = [[
+            InlineKeyboardButton('ʙᴀᴄᴋ', callback_data='start')
+        ]]
+        reply_markup = InlineKeyboardMarkup(buttons)
+        if query.from_user.id in ADMINS:
+            await query.message.edit_text(text=HELP_TXT, reply_markup=reply_markup, parse_mode=enums.ParseMode.HTML)
+        else:
+            await query.answer("👊Restricted Area\nOnly Bot Admin Allowed ⚠️", show_alert=True)
+            
+    elif query.data == "starter":
+        buttons = [[
             InlineKeyboardButton('🔹ɢʀᴏᴜᴘ 1🔹', url='https://t.me/+u-1NDmL5W3wxOTA1'),
             InlineKeyboardButton('🔹ɢʀᴏᴜᴘ 2🔹', url='https://t.me/+JYlJYVSaiZJlN2Fl')
             ],[      
@@ -488,14 +534,12 @@ async def cb_handler(client: Client, query: CallbackQuery):
             ]
             reply_markup = InlineKeyboardMarkup(buttons)
             await query.message.edit_reply_markup(reply_markup)
-    elif query.data == 'tips':
+    elif query.data == 'test':
         await query.answer("🔰 Ask with correct spelling\n🔰 Don't ask movies those are not released in OTT Some Of Theatre Quality Available🤧\n🔰 For better results:\n\t\t\t\t\t\t- MovieName year\n\t\t\t\t\t\t- Eg: Kuruthi 2021\n\tⒸ Cinema hub", True)
-    elif query.data == 'reqst1':
-        await query.answer("Hey Bro 😍\n\n🎯 Click On The Button below The Files You Want And Start The Bot ⬇️", True)
-    elif query.data == 'info':
-        await query.answer("⚠︎ Information ⚠︎\n\nIf you do not see the requested movie / series file, look at the next page\n\nⒸ Cinema Hub", True)
-    try: await query.answer('Piracy Is Crime')
-    except: pass
+
+    elif query.data == 'about':
+        await query.answer(text=ABOUT_TXT, True)
+
 
 
 async def auto_filter(client, msg, spoll=False):
