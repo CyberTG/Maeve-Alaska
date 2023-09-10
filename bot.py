@@ -53,6 +53,8 @@ class Bot(Client):
                 req = await JoinReqs().get_fsub_chat()
                 if req is None:
                     req = False
+                else:
+                    req = req['chat_id']
                 f.write(f"REQ_CHANNEL={req}\n")
             logging.info("Loading REQ_CHANNEL from database...")
             os.execl(sys.executable, sys.executable, "bot.py")
