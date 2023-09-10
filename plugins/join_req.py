@@ -71,7 +71,7 @@ async def add_fsub_chats(bot: Client, update: Message):
 @Client.on_message(filters.command("delchat") & filters.user(ADMINS) & filters.private)
 async def clear_fsub_chats(bot: Client, update: Message):
 
-    await db().delete_fsub_chat(chat_id=(await db.get_fsub_chat()))
+    await db().delete_fsub_chat(chat_id=(await db().get_fsub_chat())['chat_id'])
     await update.reply_text(text="Deleted fsub chat from the database.", quote=True)
 
 
@@ -83,4 +83,4 @@ async def get_fsub_chat(bot: Client, update: Message):
         await update.reply_text("No fsub chat found in the database.", quote=True)
         return
     else:
-        await update.reply_text(f"Fsub chat: <code>{chat}</code>", quote=True, parse_mode=enums.ParseMode.HTML)
+        await update.reply_text(f"Fsub chat: <code>{chat['chat_id']}</code>", quote=True, parse_mode=enums.ParseMode.HTML)
