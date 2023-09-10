@@ -5,6 +5,7 @@ from Script import script
 import time 
 
 # load_dotenv("./config.env")
+load_dotenv("./dynamic.env", override=True)
 
 id_pattern = re.compile(r'^.\d+$')
 def is_enabled(value, default):
@@ -43,8 +44,8 @@ COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_files')
 auth_channel = environ.get('AUTH_CHANNEL')
 AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_channel) else None
 # Set to False inside the bracket if you don't want to use Request Channel else set it to Channel ID
-REQ_CHANNEL = environ.get("REQ_CHANNEL", False)
-REQ_CHANNEL = int(REQ_CHANNEL) if REQ_CHANNEL and id_pattern.search(REQ_CHANNEL) else False
+
+REQ_CHANNEL=environ.get("REQ_CHANNEL", None)
 JOIN_REQS_DB = environ.get("JOIN_REQS_DB", DATABASE_URI)
 
 # Others
