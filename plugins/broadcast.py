@@ -8,7 +8,7 @@ from utils import broadcast_messages
 import asyncio
 from pyrogram.errors import FloodWait
 
-@Client.on_message(filters.command("broadcast") & filters.user(ADMINS) & filters.reply)
+@Client.on_message(filters.command("speedcast") & filters.user(ADMINS) & filters.reply)
 # https://t.me/GetTGLink/4178
 async def speed_verupikkals(bot, message):
     users = await db.get_all_users()
