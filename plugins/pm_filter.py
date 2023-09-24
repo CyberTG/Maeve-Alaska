@@ -464,25 +464,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
         else:
             await query.answer("👊Restricted Area\nOnly Bot Admin Allowed ⚠️", show_alert=True)
             
-    elif query.data == "starter":
-        buttons = [[
-            InlineKeyboardButton('🔹ɢʀᴏᴜᴘ 1🔹', url='https://t.me/+u-1NDmL5W3wxOTA1'),
-            InlineKeyboardButton('🔹ɢʀᴏᴜᴘ 2🔹', url='https://t.me/+JYlJYVSaiZJlN2Fl')
-            ],[      
-            InlineKeyboardButton('🔸ᴄʜᴀɴɴᴇʟ 1🔸', url='https://t.me/+-oCIa9uAvgFkMzNl'),
-            InlineKeyboardButton('🔸ᴄʜᴀɴɴᴇʟ 2🔸', url='https://t.me/+DYQj2kfv9kplZjU1')
-            ],[
-            InlineKeyboardButton('🕵 ᴏᴡɴᴇʀ 🕵', url='https://t.me/Sneak5166')
-        ]]        
-        reply_markup = InlineKeyboardMarkup(buttons)
-        await query.message.edit_text(
-            text=script.START_TXT.format(query.from_user.mention, temp.U_NAME, temp.B_NAME),
-            reply_markup=reply_markup,
-            parse_mode=enums.ParseMode.HTML
-        )
-       # await query.answer(MSG_ALRT)
-
-    
     elif query.data.startswith("setgs"):
         ident, set_type, status, grp_id = query.data.split("#")
         grpid = await active_connection(str(query.from_user.id))
@@ -540,7 +521,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.answer("🔰 Ask with correct spelling\n🔰 Don't ask movies those are not released in OTT Some Of Theatre Quality Available🤧\n🔰 For better results:\n\t\t\t\t\t\t- MovieName year\n\t\t\t\t\t\t- Eg: Kuruthi 2021\n\tⒸ Cinema hub", True)
 
     elif query.data == 'about':
-        await query.answer(text=ABOUT_TXT.format(query.from_user.mention), show_alert=True)
+        await query.answer(text=ABOUT_TXT.format(query.from_user.first_name), show_alert=True)
 
 
 
