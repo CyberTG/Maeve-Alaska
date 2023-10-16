@@ -1,12 +1,7 @@
 class script(object):
     START_TXT = """<b>
-Hᴇʟʟᴏ {}
-    
-Sᴏʀʀʏ ɪ ᴏɴʟʏ ᴡᴏʀᴋ ᴏɴ <a href='https://t.me/Cinema_Beacon_Group'>CɪɴɪᴍᴀBᴇᴀᴄᴏɴ Gʀᴏᴜᴘ</a>. Nᴏ ᴏᴛʜᴇʀ ᴄᴏᴍᴍᴀɴᴅ ᴡɪʟʟ ᴡᴏʀᴋ ᴏɴ ᴛʜɪs ʙᴏᴛ ᴇxᴄᴇᴘᴛ ᴘɪɴɢ. ᴅᴏɴ’ᴛ ᴡᴀsᴛᴇ ʏᴏᴜʀ ᴛɪᴍᴇ</b>"""
-    STARTER_TXT = """<b>
-Hᴇʟʟᴏ {},
-Mʏ Nᴀᴍᴇ Is <a href=https://t.me/{}>{}</a>, I Cᴀɴ Pʀᴏᴠɪᴅᴇ Mᴏᴠɪᴇs, Jᴜsᴛ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ Aɴᴅ Eɴᴊᴏʏ 😍</b>"""
-
+Hy {},
+I'm a bot made for @Cinema_Beacon_Group!  I can help you find movies.🙂 For any enquiry contact Admin @SNEAK5166</b>"""
 
     CAPTION = """
 <b>{file_name}
