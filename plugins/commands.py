@@ -48,11 +48,7 @@ async def start(client, message):
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_text(
-           # photo=random.choice(PICS),
-            #photo="https://telegra.ph/file/1ad5a37181e5d7d0cba26.jpg",
-            text=script.STARTER_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
-            reply_markup=reply_markup,
-            parse_mode=enums.ParseMode.HTML
+            text=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME)
         )
         return
 
@@ -70,11 +66,7 @@ async def start(client, message):
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_text(
-           # photo=random.choice(PICS),
-            #photo="https://telegra.ph/file/1ad5a37181e5d7d0cba26.jpg",
-            text=script.STARTER_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
-            reply_markup=reply_markup,
-            parse_mode=enums.ParseMode.HTML
+            text=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME)
         )
         return
 
