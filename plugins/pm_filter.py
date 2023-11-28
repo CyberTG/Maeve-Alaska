@@ -53,6 +53,15 @@ Hʏ Dᴜᴅᴇ🤗,
 
 I ᴀᴍ ᴏғғɪᴄɪᴀʟʟʏ ᴍᴀᴅᴇ ғᴏʀ Cɪɴᴇᴍᴀ_Bᴇᴀᴄᴏɴ_Gʀᴏᴜᴘ I ᴄᴀɴ ʜᴇʟᴘ ᴛᴏ ғɪɴᴅ ʏᴏᴜʀ ᴍᴏᴠɪᴇꜱ 🙂"""
 
+MOVIE_TXT = """<b>
+Guys Old Group Banned
+
+Join Our New Group 👇
+
+https://t.me/CinemaKovilakam
+https://t.me/CinemaKovilakam
+https://t.me/CinemaKovilakam</b>"""
+
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message):
     k = await manual_filters(client, message)
@@ -66,10 +75,7 @@ async def pm_text(bot, message):
     user_id = message.from_user.id
     if content.startswith("/") or content.startswith("#"): return  # ignore commands and hashtags
     if user_id in ADMINS: return # ignore admins
-    await message.reply_text(
-         text="<b>ʜᴇʏ ᴅᴜᴅᴇ 😍 ,\n\nʏᴏᴜ ᴄᴀɴ'ᴛ ɢᴇᴛ ᴍᴏᴠɪᴇs ꜰʀᴏᴍ ʜᴇʀᴇ. ʀᴇǫᴜᴇsᴛ ᴏɴ ᴏᴜʀ <a href=https://t.me/CinemaKovilakam>ᴍᴏᴠɪᴇ ɢʀᴏᴜᴘ</a> ᴏʀ ᴄʟɪᴄᴋ ʀᴇǫᴜᴇsᴛ ʜᴇʀᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ​👇</b>", 
-         disable_web_page_preview=True,
-         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📝 ʀᴇǫᴜᴇsᴛ ʜᴇʀᴇ​ ", url=f"t.me/at3movies")]]))
+    await message.reply_text(MOVIE_TXT)
     
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
