@@ -58,9 +58,9 @@ Guys Old Group Banned
 
 Join Our New Group 👇
 
-https://t.me/CinemaKovilakam
-https://t.me/CinemaKovilakam
-https://t.me/CinemaKovilakam</b>"""
+https://t.me/+3vI6VYxK5VBlYTNl
+https://t.me/+3vI6VYxK5VBlYTNl
+https://t.me/+3vI6VYxK5VBlYTNl</b>"""
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message):
