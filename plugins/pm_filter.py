@@ -62,7 +62,7 @@ https://t.me/+3vI6VYxK5VBlYTNl
 https://t.me/+3vI6VYxK5VBlYTNl
 https://t.me/+3vI6VYxK5VBlYTNl</b>"""
 
-@Client.on_message(filters.group & filters.text & filters.incoming)
+@Client.on_message(filters.group | filters.private & filters.text & filters.incoming)
 async def give_filter(client, message):
     k = await manual_filters(client, message)
     if k == False:
